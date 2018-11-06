@@ -43,7 +43,6 @@ prikey = RSA.construct(key_components)
 # Write the generated private key
 outfilename = f"{sys.argv[1]}.out.pem"
 print(f"Writing the private key to {outfilename}")
-f2 = open(outfilename, 'wb')
-f2.write(prikey.export_key('PEM'))
-f2.write(b'\n')  # PEMs from OpenSSL have a newline on the end of the file
-f2.close()
+with open(outfilename, 'wb') as f:
+    f.write(prikey.export_key('PEM'))
+    f.write(b'\n')  # PEMs from OpenSSL have a newline on the end of the file
