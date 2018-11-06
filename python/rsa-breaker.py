@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from Cryptodome.PublicKey import RSA
-from sympy import Integer
 from sympy.ntheory import primefactors
+from sympy.core.numbers import mod_inverse
 import sys
 
 if len(sys.argv) != 2:
@@ -29,7 +29,7 @@ print("Generating the private key")
 prime1 = l[1]  # prime1 > prime2
 prime2 = l[0]
 public_exp = pubkey.e
-private_exp = Integer(public_exp).invert((prime1-1)*(prime2-1))
+private_exp = mod_inverse(public_exp, (prime1-1)*(prime2-1))
 # coef = Integer(prime2).invert(prime1)
 # print(f"modulus: {prime1 * prime2}")
 # print(f"publicExponent: {public_exp}");
